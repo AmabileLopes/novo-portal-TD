@@ -1,0 +1,7 @@
+{
+  "name": "Portal T&D - Treinamento & Desenvolvimento",
+  "description": "Portal corporativo integrado de Treinamento e Desenvolvimento: Matriz de Competências, Solicitação de Treinamentos, Emissão e Validação de Certificados e Programa de Multiplicadores Star Makers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
