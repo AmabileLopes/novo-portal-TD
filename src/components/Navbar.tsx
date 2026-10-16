@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
+import { NddLogo } from './NddLogo';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -16,12 +17,13 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#EADCCF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-8 h-18">
-          {/* Zone 1: Brand wordmark in lower case like reference image */}
+          {/* Zone 1: Official NDD Logo */}
           <button
             onClick={() => onNavigate('home')}
-            className="text-2xl font-black tracking-tight text-[#4A151E] whitespace-nowrap shrink-0 hover:opacity-85 transition-opacity text-left font-sans"
+            className="flex items-center shrink-0 hover:opacity-85 transition-opacity text-left cursor-pointer"
+            aria-label="NDD - Início"
           >
-            t&amp;d
+            <NddLogo className="h-8 sm:h-9 w-auto" textColor="#4A151E" />
           </button>
 
           {/* Zone 2: Navigation links in clean bordeaux typography */}

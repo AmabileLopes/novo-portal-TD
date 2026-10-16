@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
+import { NddLogo } from './NddLogo';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -11,9 +12,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div>
-            <span className="text-white font-black text-2xl tracking-tight block mb-3 font-sans">
-              t&amp;d
-            </span>
+            <div className="mb-3">
+              <NddLogo textColor="#FFFFFF" className="h-8 w-auto" />
+            </div>
             <p className="text-xs text-[#D8C5B6] leading-relaxed max-w-xs font-editorial italic text-sm">
               Um time especializado em cultura de aprendizagem, capacitação contínua e desenvolvimento de talentos.
             </p>

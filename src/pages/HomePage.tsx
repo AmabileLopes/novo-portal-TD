@@ -201,10 +201,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           </span>
         </div>
 
-        {/* Bento Grid: Destaque à Esquerda + Cards à Direita */}
+        {/* Bento Grid: 1 Destaque Maior à Esquerda + 4 Menores em Grid 2x2 à Direita no formato da imagem */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Card Maior Destaque do Mês (Left column - 5 cols) */}
-          <div className="lg:col-span-5 rounded-3xl overflow-hidden relative min-h-[480px] flex flex-col justify-end p-8 text-white shadow-md group">
+          {/* Card Maior Destaque do Mês (Left column - 6 cols) com cantos arredondados diagonalmente (top-left e bottom-right) */}
+          <div className="lg:col-span-6 rounded-tl-[48px] sm:rounded-tl-[72px] lg:rounded-tl-[88px] rounded-br-[48px] sm:rounded-br-[72px] lg:rounded-br-[88px] rounded-tr-none rounded-bl-none overflow-hidden relative min-h-[460px] lg:min-h-[520px] h-full flex flex-col justify-end p-8 sm:p-10 text-white shadow-md group border border-[#EADCCF]">
             {/* Rich Photographic Background with dark gradient scrim */}
             <div 
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -222,7 +222,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <span>Destaque do Mês</span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Diagnóstico &amp; Liderança
               </h3>
 
@@ -244,7 +244,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="pt-2">
                 <button
                   onClick={() => handleEnroll(featuredTraining)}
-                  className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold text-[#3E1219] bg-white hover:bg-slate-100 transition-colors shadow-lg flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold text-[#3E1219] bg-white hover:bg-slate-100 transition-colors shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Garantir Vaga no Destaque</span>
                   <ArrowRight className="w-4 h-4" />
@@ -253,9 +253,9 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          {/* Grid de Cards dos Últimos Lançados (Right column - 7 cols) */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {recentReleases.map((item) => (
+          {/* Grid de 4 Cards Menores (Right column - 6 cols em 2x2) com cantos arredondados diagonalmente */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
+            {recentReleases.slice(0, 4).map((item) => (
               <div
                 key={item.id}
                 onClick={() => {
@@ -283,21 +283,21 @@ export const HomePage: React.FC<HomePageProps> = ({
                     }
                   }
                 }}
-                className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 ${
+                className={`p-6 sm:p-7 rounded-tl-[36px] sm:rounded-tl-[48px] rounded-br-[36px] sm:rounded-br-[48px] rounded-tr-none rounded-bl-none border transition-all cursor-pointer flex flex-col justify-between hover:shadow-md hover:-translate-y-1 ${
                   item.highlighted
-                    ? 'bg-[#EFE5EB] border-[#E2CED7] text-[#4A151E]' // Card highlighted like "Elogios" in Pagina 2.png
-                    : 'bg-[#FFFDFB] border-[#EADCCF] hover:border-[#D5C2B2] text-[#4A151E]'
+                    ? 'bg-[#EFE5EB] border-[#E2CED7] text-[#4A151E]' // Card destacado como "Elogios"
+                    : 'bg-[#FFFDFB] border-[#EADCCF] hover:border-[#8C3B4B] text-[#4A151E]'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs font-semibold mb-2 text-[#7A2838]">
+                  <div className="flex items-center justify-between text-xs font-semibold mb-2.5 text-[#7A2838]">
                     <span>{item.category}</span>
                     <span className="font-mono text-[11px] bg-white/70 px-2 py-0.5 rounded-full border border-[#EADCCF]/70">
                       {item.hours}
                     </span>
                   </div>
 
-                  <h4 className="text-xl font-bold text-[#3E1219] mb-2 leading-snug">
+                  <h4 className="text-lg sm:text-xl font-bold text-[#3E1219] mb-2 leading-snug">
                     {item.title}
                   </h4>
 
@@ -314,6 +314,244 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          NOVO BLOCO INTERMEDIÁRIO: PILARES DO T&D (ESTILO PÁGINA 1 & PÁGINA 2)
+          - Blocos alternados (foto/texto e texto/foto)
+          - Títulos em bordô vibrante, seções NECESSIDADE e INTERVENÇÃO
+          - Botões customizados direcionando diretamente para cada funcionalidade
+         ========================================================================= */}
+      <section className="space-y-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-[#EADCCF] pb-4">
+          <div>
+            <span className="text-xs uppercase tracking-widest font-bold text-[#8C3B4B] block mb-1">
+              pilares &amp; ferramentas do portal
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#3E1219] tracking-tight">
+              Como o T&amp;D Transforma o Desenvolvimento da Empresa
+            </h2>
+          </div>
+          <span className="text-xs text-[#7A2838]">
+            Da identificação de gaps à cultura colaborativa de aprendizagem
+          </span>
+        </div>
+
+        {/* 1º Item: MATRIZ DE COMPETÊNCIAS (Foto à Esquerda, Texto à Direita) */}
+        <div className="bg-[#FFFDFB] rounded-3xl border border-[#EADCCF] overflow-hidden shadow-xs hover:border-[#8C3B4B] transition-all grid grid-cols-1 lg:grid-cols-2">
+          {/* Foto à Esquerda */}
+          <div className="relative min-h-[340px] sm:min-h-[420px] lg:h-full overflow-hidden bg-[#FAF7F2]">
+            <img
+              src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
+              alt="Análise de Matriz de Competências corporativa"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* Texto à Direita */}
+          <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-[#FFFDFB]">
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#A22345] tracking-tight leading-[1.08] mb-2">
+                Matriz <br />
+                de competências
+              </h3>
+              <p className="text-xs sm:text-sm text-[#7A2838] leading-relaxed mb-6 font-medium">
+                mapeamento estruturado de hard e soft skills, régua de proficiência 1 a 5 e geração de PDI
+              </p>
+
+              {/* NECESSIDADE */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  NECESSIDADE:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Gaps técnicos invisíveis na rotina, planos de carreira indefinidos e decisões de promoção baseadas em impressões isoladas, sem clareza sobre o nível de maturidade esperado para cada posição na organização.
+                </p>
+              </div>
+
+              {/* INTERVENÇÃO */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  INTERVENÇÃO:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Estruturamos matrizes oficiais por departamento e senioridade. Diagnosticamos os gaps da equipe em tempo real e geramos automaticamente o Plano de Desenvolvimento Individual (PDI) com treinamentos recomendados para sanar cada defasagem.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onNavigate('competencies')}
+              className="px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#A22345] hover:bg-[#851A30] text-white font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2 self-start sm:self-end mt-4 cursor-pointer"
+            >
+              <span>Acessar Matriz de Competências</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* 2º Item: STAR MAKERS (Texto à Esquerda, Foto à Direita) */}
+        <div className="bg-[#FFFDFB] rounded-3xl border border-[#EADCCF] overflow-hidden shadow-xs hover:border-[#8C3B4B] transition-all grid grid-cols-1 lg:grid-cols-2">
+          {/* Texto à Esquerda */}
+          <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-[#FFFDFB] order-2 lg:order-1">
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#A22345] tracking-tight leading-[1.08] mb-2">
+                Star <br />
+                Makers
+              </h3>
+              <p className="text-xs sm:text-sm text-[#7A2838] leading-relaxed mb-6 font-medium">
+                programa corporativo de multiplicadores internos e facilitação colaborativa de conhecimento
+              </p>
+
+              {/* NECESSIDADE */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  NECESSIDADE:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Conhecimento prático e estratégico retido em silos departamentais. Falta de protagonismo e de espaços formais para colaboradores experientes compartilharem suas melhores práticas, gerando dependência excessiva de consultorias externas.
+                </p>
+              </div>
+
+              {/* INTERVENÇÃO */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  INTERVENÇÃO:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Capacitamos e reconhecemos profissionais da empresa como instrutores oficiais nos níveis Bronze, Silver, Gold e Diamond. Estimulamos a cultura peer-to-peer onde quem ensina consolida liderança e quem aprende evolui com a realidade do nosso negócio.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onNavigate('star-makers')}
+              className="px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#A22345] hover:bg-[#851A30] text-white font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2 self-start sm:self-end mt-4 cursor-pointer"
+            >
+              <span>Conhecer os Star Makers</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Foto à Direita */}
+          <div className="relative min-h-[340px] sm:min-h-[420px] lg:h-full overflow-hidden bg-[#FAF7F2] order-1 lg:order-2">
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80"
+              alt="Facilitadoras internas do programa Star Makers compartilhando conhecimento"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+        </div>
+
+        {/* 3º Item: SOLICITAÇÃO DE TREINAMENTOS (Foto à Esquerda, Texto à Direita) */}
+        <div className="bg-[#FFFDFB] rounded-3xl border border-[#EADCCF] overflow-hidden shadow-xs hover:border-[#8C3B4B] transition-all grid grid-cols-1 lg:grid-cols-2">
+          {/* Foto à Esquerda */}
+          <div className="relative min-h-[340px] sm:min-h-[420px] lg:h-full overflow-hidden bg-[#FAF7F2]">
+            <img
+              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80"
+              alt="Alinhamento estratégico de orçamento e capacitação corporativa"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* Texto à Direita */}
+          <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-[#FFFDFB]">
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#A22345] tracking-tight leading-[1.08] mb-2">
+                Solicitação <br />
+                de treinamentos
+              </h3>
+              <p className="text-xs sm:text-sm text-[#7A2838] leading-relaxed mb-6 font-medium">
+                fluxo online estruturado com aprovação da liderança, controle de verba e justificativa de ROI
+              </p>
+
+              {/* NECESSIDADE */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  NECESSIDADE:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Demandas de treinamento dispersas em e-mails e conversas informais, sem rastreabilidade de centro de custo, gerando contratações pontuais sem conexão comprovada com as metas e indicadores do time.
+                </p>
+              </div>
+
+              {/* INTERVENÇÃO */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  INTERVENÇÃO:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Centralizamos todas as solicitações corporativas em um fluxo com protocolo único. Colaborador e gestor alinham justificativa, investimento e impacto de negócio, com aprovação transparente e linha do tempo em tempo real.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onNavigate('training-request')}
+              className="px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#A22345] hover:bg-[#851A30] text-white font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2 self-start sm:self-end mt-4 cursor-pointer"
+            >
+              <span>Abrir Solicitação de Treinamento</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* 4º Item: ENVIO & EMISSÃO DE CERTIFICADOS (Texto à Esquerda, Foto à Direita) */}
+        <div className="bg-[#FFFDFB] rounded-3xl border border-[#EADCCF] overflow-hidden shadow-xs hover:border-[#8C3B4B] transition-all grid grid-cols-1 lg:grid-cols-2">
+          {/* Texto à Esquerda */}
+          <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-[#FFFDFB] order-2 lg:order-1">
+            <div>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#A22345] tracking-tight leading-[1.08] mb-2">
+                Envio &amp; emissão <br />
+                de certificados
+              </h3>
+              <p className="text-xs sm:text-sm text-[#7A2838] leading-relaxed mb-6 font-medium">
+                acreditação profissional oficial, histórico de horas e validador público de autenticidade
+              </p>
+
+              {/* NECESSIDADE */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  NECESSIDADE:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Dificuldade dos colaboradores em comprovar a conclusão de capacitações, perda de comprovantes físicos e ausência de uma base centralizada de dados para auditorias corporativas e comitês de promoção.
+                </p>
+              </div>
+
+              {/* INTERVENÇÃO */}
+              <div className="mb-6">
+                <h4 className="text-sm sm:text-base font-black text-[#1F0A11] uppercase tracking-wider mb-1.5">
+                  INTERVENÇÃO:
+                </h4>
+                <p className="text-xs sm:text-sm text-[#3D141C] leading-relaxed">
+                  Disponibilizamos certificados oficiais assinados pela diretoria de DHO e instrutores, prontos para download em alta resolução e impressão A4, com código verificador exclusivo para validação imediata de autenticidade no portal.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => onNavigate('certificates')}
+              className="px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#A22345] hover:bg-[#851A30] text-white font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2 self-start sm:self-end mt-4 cursor-pointer"
+            >
+              <span>Consultar e Emitir Certificados</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Foto à Direita */}
+          <div className="relative min-h-[340px] sm:min-h-[420px] lg:h-full overflow-hidden bg-[#FAF7F2] order-1 lg:order-2">
+            <img
+              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
+              alt="Colaboradores celebrando conquista de certificação profissional e formatura corporativa"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
           </div>
         </div>
       </section>
@@ -412,74 +650,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* =========================================================================
-          BLOCO 4: NAVEGAÇÃO RÁPIDA PARA AS DEMAIS PÁGINAS DO PORTAL
-         ========================================================================= */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <button
-          onClick={() => onNavigate('competencies')}
-          className="text-left p-6 bg-[#FFFDFB] rounded-2xl border border-[#EADCCF] hover:border-[#581C26] transition-all group"
-        >
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8C3B4B] block mb-1">
-            02. página
-          </span>
-          <h4 className="text-base font-bold text-[#3E1219] mb-1 flex items-center justify-between">
-            <span>Matriz de Competências</span>
-            <ChevronRight className="w-4 h-4 text-[#8C3B4B] group-hover:translate-x-1 transition-transform" />
-          </h4>
-          <p className="text-xs text-[#6A2834] leading-relaxed">
-            Consulte a régua de proficiência 1 a 5 por cargo e calcule seus gaps com geração de PDI.
-          </p>
-        </button>
-
-        <button
-          onClick={() => onNavigate('training-request')}
-          className="text-left p-6 bg-[#FFFDFB] rounded-2xl border border-[#EADCCF] hover:border-[#581C26] transition-all group"
-        >
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8C3B4B] block mb-1">
-            03. página
-          </span>
-          <h4 className="text-base font-bold text-[#3E1219] mb-1 flex items-center justify-between">
-            <span>Solicitar Treinamentos</span>
-            <ChevronRight className="w-4 h-4 text-[#8C3B4B] group-hover:translate-x-1 transition-transform" />
-          </h4>
-          <p className="text-xs text-[#6A2834] leading-relaxed">
-            Formulário online com aprovação da liderança, estimativa de verba e timeline de acompanhamento.
-          </p>
-        </button>
-
-        <button
-          onClick={() => onNavigate('certificates')}
-          className="text-left p-6 bg-[#FFFDFB] rounded-2xl border border-[#EADCCF] hover:border-[#581C26] transition-all group"
-        >
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8C3B4B] block mb-1">
-            04. página
-          </span>
-          <h4 className="text-base font-bold text-[#3E1219] mb-1 flex items-center justify-between">
-            <span>Certificados Oficiais</span>
-            <ChevronRight className="w-4 h-4 text-[#8C3B4B] group-hover:translate-x-1 transition-transform" />
-          </h4>
-          <p className="text-xs text-[#6A2834] leading-relaxed">
-            Emissão de certificados corporativos em PDF/impressão e validador público de autenticidade.
-          </p>
-        </button>
-
-        <button
-          onClick={() => onNavigate('star-makers')}
-          className="text-left p-6 bg-[#EFE5EB] rounded-2xl border border-[#E2CED7] hover:border-[#581C26] transition-all group"
-        >
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#8C3B4B] block mb-1">
-            05. página
-          </span>
-          <h4 className="text-base font-bold text-[#3E1219] mb-1 flex items-center justify-between">
-            <span>Star Makers</span>
-            <ChevronRight className="w-4 h-4 text-[#8C3B4B] group-hover:translate-x-1 transition-transform" />
-          </h4>
-          <p className="text-xs text-[#6A2834] leading-relaxed">
-            Programa de multiplicadores internos com ranking, medalhas, mural de elogios e inscrição.
-          </p>
-        </button>
-      </section>
 
       {/* Course Detail Modal */}
       {selectedTrainingModal && (
